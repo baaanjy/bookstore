@@ -1,11 +1,11 @@
 import "@/style/index.css";
 
+import { Outlet } from "react-router-dom";
+
 
 function App() {
   return (
-    <>
-      <div className="bg-gray-50 font-extrabold">HI</div>
-    </>
+    <Outlet/>
   );
 }
 
