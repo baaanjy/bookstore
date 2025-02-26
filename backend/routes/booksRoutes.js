@@ -31,10 +31,25 @@ router.put('/:id', async (req, res) => {
     )
 
     if (!updatedBook) {
-      return sendResponse(res, false, 404, 'Book not found')
+      sendResponse(res, false, 404, 'Book not found')
     }
 
     sendResponse(res, true, 200, 'Book updated', updatedBook)
+  } catch (error) {
+    sendResponse(res, false, 500, 'Server error', error.message)
+  }
+})
+
+router.get('/:id', async (req, res) => {
+  try{
+    const id = req.params.id
+    const foundBook = await Book.findOne({_id: id})
+
+    if(!foundBook){
+      sendResponse(res, false, 404, 'Book not found')
+    }
+
+    sendResponse(res, true, 200, 'Book found', foundBook)
   } catch (error) {
     sendResponse(res, false, 500, 'Server error', error.message)
   }

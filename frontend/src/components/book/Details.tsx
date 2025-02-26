@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import {books} from "@/mocks/books.json"
+import { getBook } from "@/api/book";
 import Book from "@/types/book";
 
 import EditDeleteBtns from "../common/EditDeleteBtns";
@@ -12,10 +12,11 @@ export default function Details(){
 
   useEffect(()=>{
     if(!id) return
-
-    // TODO: 데이터 연결
-    const foundBook = books.find((book) => book.id === Number(id))
-    setBook(foundBook)
+    const fetchBook = async() => {
+      const foundBook = await getBook(id)
+      setBook(foundBook)
+    }
+    fetchBook()
   },[id])
 
   return(

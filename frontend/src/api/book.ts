@@ -31,3 +31,19 @@ export async function updateBook(id:string, bookData: UpdateBookData){
     return
   }
 }
+
+export async function getBook(id:string){
+  try{
+    const response = await api.get(`/books/${id}`)
+    if(response.data.success){
+      const book = response.data.data
+      return book
+    } else{
+      console.log(response.data.message)
+      return []
+    }
+  } catch(error) {
+    console.log(error)
+    return []
+  }
+}
