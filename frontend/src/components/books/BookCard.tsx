@@ -10,7 +10,7 @@ interface Props{
 export default function BookCard({book}: Props){
   return(
     <div className="w-fit h-64 relative">
-      <Link to={`/${book.id}`} className="w-full h-full flex gap-10 justify-center group peer">
+      <Link to={`/${book._id}`} className="w-full h-full flex gap-10 justify-center group peer">
         <div className="w-48 h-full bg-book group-hover:shadow-md p-3">
           <p className="font-semibold text-3xl text-myblue">{book.title}</p>
         </div>

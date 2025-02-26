@@ -19,4 +19,25 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.put('/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    const newData = req.body
+
+    const updatedBook = await Book.findByIdAndUpdate(
+      id,
+      newData,
+      {new: true}
+    )
+
+    if (!updatedBook) {
+      return sendResponse(res, false, 404, 'Book not found')
+    }
+
+    sendResponse(res, true, 200, 'Book updated', updatedBook)
+  } catch (error) {
+    sendResponse(res, false, 500, 'Server error', error.message)
+  }
+})
+
 module.exports = router

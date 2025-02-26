@@ -1,5 +1,5 @@
 import api from "@/api/index.ts"
-import Book from "@/types/book"
+import Book, { UpdateBookData } from "@/types/book"
 
 const REGION = 'ko-KR'
 
@@ -26,5 +26,20 @@ export async function getBooks(){
   } catch(error) {
     console.log(error)
     return []
+  }
+}
+
+export async function updateBook(id:string, bookData: UpdateBookData){
+  try{
+    const response = await api.put(`/books/${id}`, bookData)
+    if(response.data.success){
+      return response.data.data
+    }else{
+      console.log(response.data.message)
+      return
+    }
+  } catch(error){
+    console.log(error)
+    return
   }
 }
