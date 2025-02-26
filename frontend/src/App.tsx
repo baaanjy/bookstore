@@ -1,12 +1,18 @@
-import "@/style/index.css";
+import '@/style/index.css'
 
+import { Outlet } from 'react-router-dom'
+
+import Footer from './components/common/Footer'
+import Header from './components/common/Header'
 
 function App() {
   return (
     <>
-      <div className="bg-gray-50 font-extrabold">HI</div>
+      <Header />
+      <Outlet />
+      <Footer />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
