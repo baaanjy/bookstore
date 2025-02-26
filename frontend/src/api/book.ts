@@ -47,3 +47,18 @@ export async function getBook(id:string){
     return []
   }
 }
+
+export async function deleteBook(id:string){
+  try{
+    const response = await api.delete(`/books/${id}`)
+    if(response.data.success){
+      return
+    } else {
+      console.log(response.data.message)
+      return
+    }
+  } catch (error) {
+    console.log(error)
+    return
+  }
+}

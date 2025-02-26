@@ -55,4 +55,18 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.delete('/:id', async (req, res) => {
+  try{
+    const id = req.params.id
+    const deletedBook = await Book.deleteOne({_id: id})
+
+    if (!deletedBook) {
+      sendResponse(res, false, 404, 'Book not found')
+    }
+
+    sendResponse(res, true, 200, 'Book deleted')
+  } catch (error) {
+    sendResponse(res, false, 500, 'Server error', error.message)
+  }
+})
 module.exports = router
