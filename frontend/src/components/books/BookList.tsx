@@ -1,11 +1,19 @@
-import {books} from "@/mocks/books.json"
+// import {books} from "@/mocks/books.json"
+
+import Book from "@/types/book";
 
 import BookDialog from "../common/BookDialog";
 import Tooltip from "../common/Tooltip";
 import { DialogTrigger } from "../ui/dialog";
 import BookCard from "./BookCard";
 
-export default function BookList(){
+interface Props{
+  books: Book[] | null
+}
+export default function BookList({books}:Props){
+
+  if(!books) return (<div>No Books</div>)
+
   const addBook = () => {
     // TODO: 등록 기능
   }
@@ -25,9 +33,8 @@ export default function BookList(){
         </BookDialog>
       </div>
       <div className="gap-5 flex flex-col items-center py-10">
-        {/* TODO: 데이터 연결 */}
         {books.map((book)=> (
-          <BookCard book={book} key={book.id}/>
+          <BookCard book={book} key={book._id}/>
         ))}
       </div>
     </div>

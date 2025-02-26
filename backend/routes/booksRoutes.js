@@ -3,15 +3,19 @@ const router = express.Router()
 
 const Book = require("../models/book")
 
+function sendResponse(res, success, status, message=null, data=null){
+  return res.status(status).json({ success, status, message, data})
+}
+
 router.get('/', async (req, res) => {
   try {
     const books = await Book.find() 
     if (!books || books.length === 0) {
-      return res.status(404).json({ message: 'No books found' })
+      sendResponse(res, false, 404, 'No Books Found')
     }
-    res.json(books)
+    sendResponse(res, true, 200, 'Books Found', books)
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message })
+    sendResponse(res, false, 500, 'Server error', error.message)
   }
 })
 
