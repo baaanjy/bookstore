@@ -1,36 +1,35 @@
 // import {books} from "@/mocks/books.json"
 
-import Book from "@/types/book";
+import Book from '@/types/book'
 
-import BookDialog from "../common/BookDialog";
-import Tooltip from "../common/Tooltip";
-import { DialogTrigger } from "../ui/dialog";
-import BookCard from "./BookCard";
+import BookDialog from '../common/BookDialog'
+import Tooltip from '../common/Tooltip'
+import { DialogTrigger } from '../ui/dialog'
+import BookCard from './BookCard'
 
-interface Props{
+interface Props {
   books: Book[] | null
 }
-export default function BookList({books}:Props){
+export default function BookList({ books }: Props) {
+  if (!books) return <div>No Books</div>
 
-  if(!books) return (<div>No Books</div>)
-
-  return(
+  return (
     <div>
-      <div className="flex gap-3 items-center">
+      <div className="flex items-center gap-3">
         <p className="text-xl">총 {books.length}개</p>
-        <BookDialog dialogTitle="신규 등록" >
+        <BookDialog dialogTitle="신규 등록">
           <Tooltip text="등록">
             <DialogTrigger asChild>
-              <button className="w-6 h-6 flex justify-center items-center cursor-pointer">
+              <button className="flex h-6 w-6 cursor-pointer items-center justify-center">
                 <img src="../icons/plus.svg" alt="등록" />
               </button>
             </DialogTrigger>
           </Tooltip>
         </BookDialog>
       </div>
-      <div className="gap-5 flex flex-col items-center py-10">
-        {books.map((book)=> (
-          <BookCard book={book} key={book._id}/>
+      <div className="flex flex-col items-center gap-5 py-10">
+        {books.map((book) => (
+          <BookCard book={book} key={book._id} />
         ))}
       </div>
     </div>

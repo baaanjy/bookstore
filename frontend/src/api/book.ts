@@ -1,57 +1,57 @@
-import api from "@/api/index.ts"
-import { InputBookData } from "@/types/book"
+import api from '@/api/index.ts'
+import { InputBookData } from '@/types/book'
 
-export async function getBooks(){
-  try{
-    const response = await api.get("/books")
-    if(response.data.success){
+export async function getBooks() {
+  try {
+    const response = await api.get('/books')
+    if (response.data.success) {
       const books = response.data.data
       return books
-    } else{
+    } else {
       console.log(response.data.message)
       return []
     }
-  } catch(error) {
+  } catch (error) {
     console.log(error)
     return []
   }
 }
 
-export async function updateBook(id:string, bookData: InputBookData){
-  try{
+export async function updateBook(id: string, bookData: InputBookData) {
+  try {
     const response = await api.put(`/books/${id}`, bookData)
-    if(response.data.success){
+    if (response.data.success) {
       return response.data.data
-    }else{
+    } else {
       console.log(response.data.message)
       return
     }
-  } catch(error){
+  } catch (error) {
     console.log(error)
     return
   }
 }
 
-export async function getBook(id:string){
-  try{
+export async function getBook(id: string) {
+  try {
     const response = await api.get(`/books/${id}`)
-    if(response.data.success){
+    if (response.data.success) {
       const book = response.data.data
       return book
-    } else{
+    } else {
       console.log(response.data.message)
       return []
     }
-  } catch(error) {
+  } catch (error) {
     console.log(error)
     return []
   }
 }
 
-export async function deleteBook(id:string){
-  try{
+export async function deleteBook(id: string) {
+  try {
     const response = await api.delete(`/books/${id}`)
-    if(response.data.success){
+    if (response.data.success) {
       return
     } else {
       console.log(response.data.message)
@@ -63,10 +63,10 @@ export async function deleteBook(id:string){
   }
 }
 
-export async function createBook(newData: InputBookData){
-  try{
+export async function createBook(newData: InputBookData) {
+  try {
     const response = await api.post('/books/', newData)
-    if(response.data.success){
+    if (response.data.success) {
       return
     } else {
       console.log(response.data.message)

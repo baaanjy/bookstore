@@ -5,10 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-myblue: #1C5E8A;
-  --color-myyellow: #FFF200;
-  --color-myred: #FA5530;
-  --color-book: #E5DECD;
+  --color-myblue: #1c5e8a;
+  --color-myyellow: #fff200;
+  --color-myred: #fa5530;
+  --color-book: #e5decd;
 }
 
 @layer base {
@@ -18,44 +18,44 @@
 }
 
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-Black.woff2") format("woff2");
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Black.woff2') format('woff2');
   font-weight: 100;
 }
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-ExtraLight.woff2") format("woff2");
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-ExtraLight.woff2') format('woff2');
   font-weight: 200;
 }
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-Light.woff2") format("woff2");
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Light.woff2') format('woff2');
   font-weight: 300;
 }
 
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-Regular.woff2") format("woff2");
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Regular.woff2') format('woff2');
   font-weight: 400;
 }
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-Medium.woff2") format("woff2");
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Medium.woff2') format('woff2');
   font-weight: 500;
 }
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-SemiBold.woff2") format("woff2");
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-SemiBold.woff2') format('woff2');
   font-weight: 600;
 }
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-Bold.woff2") format("woff2");
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Bold.woff2') format('woff2');
   font-weight: 700;
 }
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-ExtraBold.woff2") format("woff2");
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-ExtraBold.woff2') format('woff2');
   font-weight: 800;
 }
 
