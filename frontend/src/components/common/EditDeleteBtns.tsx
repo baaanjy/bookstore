@@ -8,13 +8,10 @@ interface Props{
   book: Book;
 }
 export default function EditDeleteBtns({book}:Props){
-  const editBook = () =>{
-    // TODO: 수정 기능
-  }
 
   return(
     <>
-      <BookDialog dialogTitle="수정" onSubmit={editBook} book={book}>
+      <BookDialog dialogTitle="수정" book={book}>
         <Tooltip text="수정">
           <DialogTrigger asChild>
             <button className="w-6 h-6 cursor-pointer">

@@ -14,15 +14,11 @@ export default function BookList({books}:Props){
 
   if(!books) return (<div>No Books</div>)
 
-  const addBook = () => {
-    // TODO: 등록 기능
-  }
-
   return(
     <div>
       <div className="flex gap-3 items-center">
         <p className="text-xl">총 {books.length}개</p>
-        <BookDialog dialogTitle="신규 등록" onSubmit={addBook}>
+        <BookDialog dialogTitle="신규 등록" >
           <Tooltip text="등록">
             <DialogTrigger asChild>
               <button className="w-6 h-6 flex justify-center items-center cursor-pointer">

@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod"
 
+import { updateBook } from "@/api/book";
 import Book from "@/types/book";
 
 import { Button } from "../ui/button";
@@ -11,14 +12,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 
 const formSchema = z.object({
-  title: z.string().max(15),
+  title: z.string().max(25),
   author: z.string().max(15),
   publisher: z.string().max(15),
   pub_date: z.string().max(10),
   sales: z.number().positive(),
   stock: z.number().positive(),
   price: z.number().positive(),
-  description: z.string().max(15),
+  description: z.string().max(30),
   details: z.string().max(500)
 })
 
@@ -26,10 +27,9 @@ interface Props{
   book?: Book;
   children: ReactNode;
   dialogTitle: string;
-  onSubmit: (values: z.infer<typeof formSchema>) => void;
 }
 
-export default function BookDialog({book, children, dialogTitle, onSubmit}:Props){
+export default function BookDialog({book, children, dialogTitle}:Props){
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,6 +45,19 @@ export default function BookDialog({book, children, dialogTitle, onSubmit}:Props
     }
   })
 
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if(dialogTitle === "수정"){
+      if(!book) return
+      try{
+        const updateData = {...values}
+        await updateBook(book._id, updateData)
+        alert("✨ 수정 완료! ✨")
+        window.location.reload()
+      } catch (error) {
+          console.log(error)
+        }
+    }
+  }
 
   return(
     <Dialog>
@@ -64,7 +77,7 @@ export default function BookDialog({book, children, dialogTitle, onSubmit}:Props
                   <FormItem className="grid grid-cols-4">
                     <FormLabel className="h-full flex items-center justify-center">책 제목</FormLabel>
                     <FormControl className="col-span-3">
-                      <Input {...field} />
+                      <Input {...field} required/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -77,7 +90,7 @@ export default function BookDialog({book, children, dialogTitle, onSubmit}:Props
                   <FormItem className="grid grid-cols-4">
                     <FormLabel className="h-full flex items-center justify-center">저자</FormLabel>
                     <FormControl className="col-span-3">
-                      <Input {...field} />
+                      <Input {...field} required/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -90,7 +103,7 @@ export default function BookDialog({book, children, dialogTitle, onSubmit}:Props
                   <FormItem className="grid grid-cols-4">
                     <FormLabel className="h-full flex items-center justify-center">출판사</FormLabel>
                     <FormControl className="col-span-3">
-                      <Input {...field} />
+                      <Input {...field} required/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -103,7 +116,7 @@ export default function BookDialog({book, children, dialogTitle, onSubmit}:Props
                   <FormItem className="grid grid-cols-4">
                     <FormLabel className="h-full flex items-center justify-center">출판일</FormLabel>
                     <FormControl className="col-span-3">
-                      <Input {...field} />
+                      <Input {...field} required/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -116,7 +129,11 @@ export default function BookDialog({book, children, dialogTitle, onSubmit}:Props
                   <FormItem className="grid grid-cols-4">
                     <FormLabel className="h-full flex items-center justify-center">가격</FormLabel>
                     <FormControl className="col-span-3">
-                      <Input {...field} />
+                      <Input {...field} 
+                        type="number"
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        required
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -129,7 +146,7 @@ export default function BookDialog({book, children, dialogTitle, onSubmit}:Props
                   <FormItem className="grid grid-cols-4">
                     <FormLabel className="h-full flex items-center justify-center">소개</FormLabel>
                     <FormControl className="col-span-3">
-                      <Input {...field} />
+                      <Input {...field} required/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -142,7 +159,11 @@ export default function BookDialog({book, children, dialogTitle, onSubmit}:Props
                   <FormItem className="grid grid-cols-4">
                     <FormLabel className="h-full flex items-center justify-center">판매량</FormLabel>
                     <FormControl className="col-span-3">
-                      <Input {...field} />
+                      <Input {...field} 
+                        type="number"
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        required
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -155,7 +176,11 @@ export default function BookDialog({book, children, dialogTitle, onSubmit}:Props
                   <FormItem className="grid grid-cols-4">
                     <FormLabel className="h-full flex items-center justify-center">재고</FormLabel>
                     <FormControl className="col-span-3">
-                      <Input {...field} />
+                      <Input {...field} 
+                        type="number"
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        required
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

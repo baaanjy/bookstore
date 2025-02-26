@@ -18,9 +18,9 @@ export default function BookCard({book}: Props){
         <div className="h-full w-xl p-5 flex flex-col justify-between group-hover:shadow-md">
           <p className="text-2xl">{book.title}</p>
           <p className="text-xl">{book.author}/{book.publisher}/{String(book.pub_date)}</p>
-          <p className="text-xl">{book.price}원</p>
+          <p className="text-xl">{book.price.toLocaleString('ko-KR')}원</p>
           <p>{book.description}</p>
-          <p>판매량 {book.sales} 재고 {book.stock}</p>
+          <p>판매량 {book.sales.toLocaleString('ko-KR')} 재고 {book.stock.toLocaleString('ko-KR')}</p>
         </div>
       </Link>
       <div className="flex gap-5 absolute bottom-5 right-5 invisible peer-hover:visible hover:visible ">
