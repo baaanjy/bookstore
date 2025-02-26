@@ -10,7 +10,7 @@ interface Props{
 export default function BookCard({book}: Props){
   return(
     // TODO: 링크 수정
-    <Link to={"/"} className="w-fit h-64 flex gap-10 justify-center group">
+    <Link to={`/${book.id}`} className="w-fit h-64 flex gap-10 justify-center group">
       <div className="w-48 h-full bg-book group-hover:shadow-md p-3">
         <p className="font-semibold text-3xl text-myblue">{book.title}</p>
       </div>

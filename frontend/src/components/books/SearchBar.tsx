@@ -9,7 +9,7 @@ import {
 
 export default function SearchBar() {
   return (
-    <div className="mt-10 mb-10 w-full h-11 border-myblue border-2">
+    <div className="mb-10 w-full h-11 border-myblue border-2">
       <div className="flex h-full w-full items-center justify-between px-5">
         <Select defaultValue="all">
           <SelectTrigger className="w-30 border-none shadow-none focus:ring-0">
