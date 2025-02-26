@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import Book from "@/types/book";
 
-import Tooltip from "../common/Tooltip";
+import EditDeleteBtns from "../common/EditDeleteBtns";
 
 interface Props{
   book: Book
@@ -22,16 +22,7 @@ export default function BookCard({book}: Props){
         <p>{book.description}</p>
         <p>판매량 {book.sales} 재고 {book.stock}</p>
         <div className="flex gap-5 justify-end w-full">
-          <Tooltip text="수정">
-            <button className="w-6 h-6 cursor-pointer">
-              <img src="/icons/setting.svg" alt="수정" className="w-full h-full"/>
-            </button>
-          </Tooltip>
-          <Tooltip text="삭제">
-            <button className="w-6 h-6 cursor-pointer">
-              <img src="/icons/delete.svg" alt="삭제" className="w-full h-full"/>
-            </button>
-          </Tooltip>
+          <EditDeleteBtns />
         </div>
       </div>
     </Link>

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import {books} from "@/mocks/books.json"
 import Book from "@/types/book";
 
-import Tooltip from "../common/Tooltip";
+import EditDeleteBtns from "../common/EditDeleteBtns";
 
 export default function Details(){
   const [book, setBook] = useState<Book>();
@@ -21,16 +21,7 @@ export default function Details(){
   return(
     <div className="flex flex-col w-full">
       <div className="flex justify-end h-fit items-end gap-5">
-        <Tooltip text="수정">
-          <button className="w-6 h-6 cursor-pointer">
-            <img src="/icons/setting.svg" alt="수정" className="w-full h-full"/>
-          </button>
-        </Tooltip>
-        <Tooltip text="삭제">
-          <button className="w-6 h-6 cursor-pointer">
-            <img src="/icons/delete.svg" alt="삭제" className="w-full h-full"/>
-            </button>
-        </Tooltip>
+        <EditDeleteBtns />
       </div>
       <div className="flex h-80">
         <div className="w-1/4 h-full bg-book group-hover:shadow-md p-3">
