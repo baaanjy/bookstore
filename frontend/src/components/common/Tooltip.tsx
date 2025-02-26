@@ -15,7 +15,7 @@ export default function Tooltip({ text, children }:Props){
     >
       {children}
       {isVisible && (
-        <div className="absolute w-12 p-2 text-sm text-center bottom-full left-1/2 transform -translate-x-1/2 mb-1 text-myred">
+        <div className="absolute w-12 text-sm text-center bottom-full left-1/2 transform -translate-x-1/2 mb-1 text-myred">
           {text}
         </div>
       )}
