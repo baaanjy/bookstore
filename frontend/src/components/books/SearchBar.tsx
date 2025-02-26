@@ -1,15 +1,15 @@
-import { Input } from "../ui/input"
+import { Input } from '../ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select"
+} from '../ui/select'
 
 export default function SearchBar() {
   return (
-    <div className="mb-10 w-full h-11 border-myblue border-2">
+    <div className="border-myblue mb-10 h-11 w-full border-2">
       <div className="flex h-full w-full items-center justify-between px-5">
         <Select defaultValue="all">
           <SelectTrigger className="w-30 border-none shadow-none focus:ring-0">
@@ -21,12 +21,14 @@ export default function SearchBar() {
             <SelectItem value="title">제목</SelectItem>
           </SelectContent>
         </Select>
-        <Input type="text" className="border-none shadow-none focus-visible:ring-0 h-full"/>
-        <button className="w-16 h-full flex justify-center items-center cursor-pointer">
+        <Input
+          type="text"
+          className="h-full border-none shadow-none focus-visible:ring-0"
+        />
+        <button className="flex h-full w-16 cursor-pointer items-center justify-center">
           <img src="/icons/search.svg" alt="검색" className="h-8 w-8" />
         </button>
       </div>
     </div>
   )
 }
-

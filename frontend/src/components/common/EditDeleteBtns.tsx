@@ -1,31 +1,43 @@
-import Book from "@/types/book";
+import { deleteBook } from '@/api/book'
+import Book from '@/types/book'
 
-import { DialogTrigger } from "../ui/dialog";
-import BookDialog from "./BookDialog";
-import Tooltip from "./Tooltip";
+import { DialogTrigger } from '../ui/dialog'
+import BookDialog from './BookDialog'
+import Tooltip from './Tooltip'
 
-interface Props{
-  book: Book;
+interface Props {
+  book: Book
 }
-export default function EditDeleteBtns({book}:Props){
-  const editBook = () =>{
-    // TODO: 수정 기능
+export default function EditDeleteBtns({ book }: Props) {
+  const handleDelete = async () => {
+    // TODO: 경고창 추가하기
+    try {
+      await deleteBook(book._id)
+      alert('💫 삭제 완료! 💫')
+      window.location.reload()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  return(
+  return (
     <>
-      <BookDialog dialogTitle="수정" onSubmit={editBook} book={book}>
+      <BookDialog dialogTitle="수정" book={book}>
         <Tooltip text="수정">
           <DialogTrigger asChild>
-            <button className="w-6 h-6 cursor-pointer">
-              <img src="/icons/setting.svg" alt="수정" className="w-full h-full"/>
+            <button className="h-6 w-6 cursor-pointer">
+              <img
+                src="/icons/setting.svg"
+                alt="수정"
+                className="h-full w-full"
+              />
             </button>
           </DialogTrigger>
         </Tooltip>
       </BookDialog>
       <Tooltip text="삭제">
-        <button className="w-6 h-6 cursor-pointer">
-          <img src="/icons/delete.svg" alt="삭제" className="w-full h-full"/>
+        <button onClick={handleDelete} className="h-6 w-6 cursor-pointer">
+          <img src="/icons/delete.svg" alt="삭제" className="h-full w-full" />
         </button>
       </Tooltip>
     </>

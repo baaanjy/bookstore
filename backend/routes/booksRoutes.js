@@ -3,15 +3,81 @@ const router = express.Router()
 
 const Book = require("../models/book")
 
+function sendResponse(res, success, status, message=null, data=null){
+  return res.status(status).json({ success, status, message, data})
+}
+
 router.get('/', async (req, res) => {
   try {
     const books = await Book.find() 
     if (!books || books.length === 0) {
-      return res.status(404).json({ message: 'No books found' })
+      sendResponse(res, false, 404, 'No Books Found')
     }
-    res.json(books)
+    sendResponse(res, true, 200, 'Books Found', books)
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message })
+    sendResponse(res, false, 500, 'Server error', error.message)
+  }
+})
+
+router.put('/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    const newData = req.body
+
+    const updatedBook = await Book.findByIdAndUpdate(
+      id,
+      newData,
+      {new: true}
+    )
+
+    if (!updatedBook) {
+      sendResponse(res, false, 404, 'Book not found')
+    }
+
+    sendResponse(res, true, 200, 'Book updated', updatedBook)
+  } catch (error) {
+    sendResponse(res, false, 500, 'Server error', error.message)
+  }
+})
+
+router.get('/:id', async (req, res) => {
+  try{
+    const id = req.params.id
+    const foundBook = await Book.findOne({_id: id})
+
+    if(!foundBook){
+      sendResponse(res, false, 404, 'Book not found')
+    }
+
+    sendResponse(res, true, 200, 'Book found', foundBook)
+  } catch (error) {
+    sendResponse(res, false, 500, 'Server error', error.message)
+  }
+})
+
+router.delete('/:id', async (req, res) => {
+  try{
+    const id = req.params.id
+    const deletedBook = await Book.deleteOne({_id: id})
+
+    if (!deletedBook) {
+      sendResponse(res, false, 404, 'Book not found')
+    }
+
+    sendResponse(res, true, 200, 'Book deleted')
+  } catch (error) {
+    sendResponse(res, false, 500, 'Server error', error.message)
+  }
+})
+
+router.post('/', async (req, res) => {
+  try {
+    const newData = req.body
+    const newBook = await Book.create({ ...newData })
+
+    sendResponse(res, true, 200, 'Book created', newBook)
+  } catch (error) {
+    sendResponse(res, false, 500, 'Server error', error.message)
   }
 })
 

@@ -1,17 +1,17 @@
-export default function Pagenation(){
-  return(
-    <div className="w-full h-10 my-10">
-      <div className="flex gap-5 justify-center items-center">
-        <div className="w-8 h-8 bg-myblue text-white flex justify-center items-center font-bold cursor-pointer">
+export default function Pagenation() {
+  return (
+    <div className="my-10 h-10 w-full">
+      <div className="flex items-center justify-center gap-5">
+        <div className="bg-myblue flex h-8 w-8 cursor-pointer items-center justify-center font-bold text-white">
           <p>1</p>
         </div>
-        <div className="w-8 h-8 text-myblue flex justify-center items-center font-semibold cursor-pointer hover:border-2 border-myblue">
+        <div className="text-myblue border-myblue flex h-8 w-8 cursor-pointer items-center justify-center font-semibold hover:border-2">
           <p>2</p>
         </div>
-        <div className="w-8 h-8 text-myblue flex justify-center items-center font-semibold cursor-pointer hover:border-2 border-myblue">
+        <div className="text-myblue border-myblue flex h-8 w-8 cursor-pointer items-center justify-center font-semibold hover:border-2">
           <p>3</p>
         </div>
-        <div className="w-8 h-8 text-myblue flex justify-center items-center font-semibold cursor-pointer hover:border-2 border-myblue">
+        <div className="text-myblue border-myblue flex h-8 w-8 cursor-pointer items-center justify-center font-semibold hover:border-2">
           <p>4</p>
         </div>
       </div>
