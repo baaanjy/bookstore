@@ -1,5 +1,5 @@
 import api from "@/api/index.ts"
-import { UpdateBookData } from "@/types/book"
+import { InputBookData } from "@/types/book"
 
 export async function getBooks(){
   try{
@@ -17,7 +17,7 @@ export async function getBooks(){
   }
 }
 
-export async function updateBook(id:string, bookData: UpdateBookData){
+export async function updateBook(id:string, bookData: InputBookData){
   try{
     const response = await api.put(`/books/${id}`, bookData)
     if(response.data.success){
@@ -51,6 +51,21 @@ export async function getBook(id:string){
 export async function deleteBook(id:string){
   try{
     const response = await api.delete(`/books/${id}`)
+    if(response.data.success){
+      return
+    } else {
+      console.log(response.data.message)
+      return
+    }
+  } catch (error) {
+    console.log(error)
+    return
+  }
+}
+
+export async function createBook(newData: InputBookData){
+  try{
+    const response = await api.post('/books/', newData)
     if(response.data.success){
       return
     } else {

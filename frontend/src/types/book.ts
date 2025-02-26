@@ -11,7 +11,7 @@ export default interface Book{
   details: string
 }
 
-export interface UpdateBookData{
+export interface InputBookData{
   title: string,
   author: string,
   publisher: string,

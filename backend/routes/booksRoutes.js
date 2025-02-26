@@ -69,4 +69,16 @@ router.delete('/:id', async (req, res) => {
     sendResponse(res, false, 500, 'Server error', error.message)
   }
 })
+
+router.post('/', async (req, res) => {
+  try {
+    const newData = req.body
+    const newBook = await Book.create({ ...newData })
+
+    sendResponse(res, true, 200, 'Book created', newBook)
+  } catch (error) {
+    sendResponse(res, false, 500, 'Server error', error.message)
+  }
+})
+
 module.exports = router

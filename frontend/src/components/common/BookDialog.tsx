@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod"
 
-import { updateBook } from "@/api/book";
+import { createBook, updateBook } from "@/api/book";
 import Book from "@/types/book";
 
 import { Button } from "../ui/button";
@@ -33,15 +33,15 @@ export default function BookDialog({book, children, dialogTitle}:Props){
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: book?.title,
-      author: book?.author,
-      publisher: book?.publisher,
-      pub_date: book?.pub_date,
-      sales: book?.sales,
-      stock: book?.stock,
-      price: book?.price,
-      description: book?.description,
-      details: book?.details,
+      title: book?.title || "",
+      author: book?.author || "",
+      publisher: book?.publisher || "",
+      pub_date: book?.pub_date || "",
+      sales: book?.sales || 0,
+      stock: book?.stock || 0,
+      price: book?.price || 0,
+      description: book?.description || "",
+      details: book?.details || "",
     }
   })
 
@@ -51,11 +51,21 @@ export default function BookDialog({book, children, dialogTitle}:Props){
       try{
         const updateData = {...values}
         await updateBook(book._id, updateData)
-        alert("✨ 수정 완료! ✨")
+        alert("💫 수정 완료! 💫")
         window.location.reload()
       } catch (error) {
-          console.log(error)
-        }
+        console.log(error)
+      }
+    }else if(dialogTitle === "신규 등록"){
+      try{
+        const newData = {...values}
+        const newBook = await createBook(newData)
+        console.log(newBook)
+        alert("💫 등록 완료! 💫")
+        window.location.reload()
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
