@@ -22,7 +22,7 @@ export default function BookCard({book}: Props){
         <p>{book.description}</p>
         <p>판매량 {book.sales} 재고 {book.stock}</p>
         <div className="flex gap-5 justify-end w-full">
-          <EditDeleteBtns />
+          <EditDeleteBtns book={book}/>
         </div>
       </div>
     </Link>

@@ -1,10 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod"
+import { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod"
 
-import Tooltip from "../common/Tooltip";
+import Book from "@/types/book";
+
 import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 
@@ -20,28 +22,36 @@ const formSchema = z.object({
   details: z.string().max(500)
 })
 
-export default function AddBookDialog(){
+interface Props{
+  book?: Book;
+  children: ReactNode;
+  dialogTitle: string;
+  onSubmit: (values: z.infer<typeof formSchema>) => void;
+}
+
+export default function BookDialog({book, children, dialogTitle, onSubmit}:Props){
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: book?.title,
+      author: book?.author,
+      publisher: book?.publisher,
+      pub_date: book?.pub_date,
+      sales: book?.sales,
+      stock: book?.stock,
+      price: book?.price,
+      description: book?.description,
+      details: book?.details,
+    }
   })
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
-  }
+
 
   return(
     <Dialog>
-      <Tooltip text="등록">
-        <DialogTrigger asChild>
-          <button className="w-6 h-6 flex justify-center items-center cursor-pointer">
-            <img src="../icons/plus.svg" alt="등록" />
-          </button>
-        </DialogTrigger>
-      </Tooltip>
+      {children}
       <DialogContent className="max-w-4xl rounded-none">
         <DialogHeader>
-          <DialogTitle>등록하기</DialogTitle>
+          <DialogTitle>{dialogTitle}</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -101,6 +111,32 @@ export default function AddBookDialog(){
               />
               <FormField
                 control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <FormItem className="grid grid-cols-4">
+                    <FormLabel className="h-full flex items-center justify-center">가격</FormLabel>
+                    <FormControl className="col-span-3">
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem className="grid grid-cols-4">
+                    <FormLabel className="h-full flex items-center justify-center">소개</FormLabel>
+                    <FormControl className="col-span-3">
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="sales"
                 render={({ field }) => (
                   <FormItem className="grid grid-cols-4">
@@ -125,19 +161,6 @@ export default function AddBookDialog(){
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem className="grid grid-cols-4">
-                    <FormLabel className="h-full flex items-center justify-center">소개</FormLabel>
-                    <FormControl className="col-span-3">
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
             </div>
               <FormField
                 control={form.control}
@@ -155,7 +178,7 @@ export default function AddBookDialog(){
                 )}
               />
             <DialogFooter>
-              <Button type="submit" className="bg-myblue hover:bg-myblue hover:text-myyellow">Save changes</Button>
+              <Button type="submit" className="bg-myblue hover:bg-myblue hover:text-myyellow">제출</Button>
             </DialogFooter>
           </form>
         </Form>

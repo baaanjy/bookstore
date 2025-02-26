@@ -21,7 +21,9 @@ export default function Details(){
   return(
     <div className="flex flex-col w-full">
       <div className="flex justify-end h-fit items-end gap-5">
-        <EditDeleteBtns />
+        {book && 
+          <EditDeleteBtns book={book}/>
+        }
       </div>
       <div className="flex h-80">
         <div className="w-1/4 h-full bg-book group-hover:shadow-md p-3">
