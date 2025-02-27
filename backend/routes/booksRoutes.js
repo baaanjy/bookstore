@@ -1,18 +1,24 @@
 const express = require('express')
 const router = express.Router()
 
-const Book = require("../models/book")
+const {
+  getBooksController,
+  createBookController,
+  getBookController,
+  updateBookController,
+  deleteBookController,
+} = require('../controllers/booksController')
 
-router.get('/', async (req, res) => {
-  try {
-    const books = await Book.find() 
-    if (!books || books.length === 0) {
-      return res.status(404).json({ message: 'No books found' })
-    }
-    res.json(books)
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message })
-  }
-})
+
+router.get('/', getBooksController)
+
+router.get('/:id', getBookController)
+
+router.post('/', createBookController)
+
+router.put('/:id', updateBookController)
+
+router.delete('/:id', deleteBookController)
+
 
 module.exports = router

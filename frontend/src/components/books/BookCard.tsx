@@ -1,30 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
-import Book from "@/types/book";
+import Book from '@/types/book'
 
-import EditDeleteBtns from "../common/EditDeleteBtns";
+import EditDeleteBtns from '../common/EditDeleteBtns'
 
-interface Props{
+interface Props {
   book: Book
 }
-export default function BookCard({book}: Props){
-  return(
-    <div className="w-fit h-64 relative">
-      <Link to={`/${book.id}`} className="w-full h-full flex gap-10 justify-center group peer">
-        <div className="w-48 h-full bg-book group-hover:shadow-md p-3">
-          <p className="font-semibold text-3xl text-myblue">{book.title}</p>
+export default function BookCard({ book }: Props) {
+  return (
+    <div className="relative h-64 w-full">
+      <Link
+        to={`/${book._id}`}
+        className="group peer grid h-full w-full grid-cols-4 justify-center gap-10">
+        <div className="bg-book col-span-1 hidden h-full p-3 group-hover:shadow-md lg:block">
+          <p className="text-myblue lg:text-3xl lg:font-semibold">
+            {book.title}
+          </p>
         </div>
 
-        <div className="h-full w-xl p-5 flex flex-col justify-between group-hover:shadow-md">
-          <p className="text-2xl">{book.title}</p>
-          <p className="text-xl">{book.author}/{book.publisher}/{String(book.pub_date)}</p>
-          <p className="text-xl">{book.price}원</p>
+        <div className="col-span-4 flex h-full w-full flex-col justify-between p-5 group-hover:shadow-md lg:col-span-3">
+          <p className="text-xl md:text-2xl">{book.title}</p>
+          <p className="text-base md:text-xl">
+            {book.author}/{book.publisher}/{String(book.pub_date)}
+          </p>
+          <p className="text-base md:text-xl">
+            {book.price.toLocaleString('ko-KR')}원
+          </p>
           <p>{book.description}</p>
-          <p>판매량 {book.sales} 재고 {book.stock}</p>
+          <p>
+            판매량 {book.sales.toLocaleString('ko-KR')} 재고{' '}
+            {book.stock.toLocaleString('ko-KR')}
+          </p>
         </div>
       </Link>
-      <div className="flex gap-5 absolute bottom-5 right-5 invisible peer-hover:visible hover:visible ">
-        <EditDeleteBtns book={book}/>
+      <div className="absolute right-5 bottom-5 hidden gap-5 sm:invisible sm:flex sm:peer-hover:visible sm:hover:visible">
+        <EditDeleteBtns book={book} />
       </div>
     </div>
   )

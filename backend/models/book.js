@@ -14,7 +14,7 @@ const bookSchema = new Schema({
     required: true,
   },
   pub_date: {
-    type: Schema.Types.Date,
+    type: Schema.Types.String,
     required: true,
   },
   description: {

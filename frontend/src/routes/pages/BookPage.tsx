@@ -1,8 +1,8 @@
-import Details from "@/components/book/Details";
+import Details from '@/components/book/Details'
 
-export default function BookPage(){
-  return(
-    <div className="w-full flex flex-col items-center my-20">
+export default function BookPage() {
+  return (
+    <div className="my-20 flex w-full flex-col items-center">
       <div className="w-2/3">
         <Details />
       </div>
