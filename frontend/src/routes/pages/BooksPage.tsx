@@ -113,9 +113,9 @@ export default function BooksPage() {
           </SelectContent>
         </Select>
 
-        {loading && <div> Loading ... 💬 </div>}
-
         <BookList books={books} totalAmount={totalAmount} />
+        
+        {loading && <div> Loading ... 💬 </div>}
         {totalAmount === 0 && searchQuery && (
           <div className="flex w-full justify-center">
             검색 결과가 존재하지 않습니다.
