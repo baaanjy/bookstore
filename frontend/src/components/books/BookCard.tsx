@@ -11,7 +11,7 @@ export default function BookCard({ book }: Props) {
   return (
     <div className="relative h-64 w-full">
       <Link
-        to={`/${book._id}`}
+        to={`book/${book._id}`}
         className="group peer grid h-full w-full grid-cols-4 justify-center gap-10">
         <div className="bg-book col-span-1 hidden h-full p-3 group-hover:shadow-md lg:block">
           <p className="text-myblue lg:text-3xl lg:font-semibold">
