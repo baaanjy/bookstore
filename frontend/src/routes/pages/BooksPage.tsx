@@ -25,12 +25,19 @@ export default function BooksPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchCategory, setSearchCategory] = useState('all')
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchBooks() {
-      const data = await getBooks(sortOption, currentPage, ITEMS_PER_PAGE)
-      setBooks(data.books)
-      setTotalAmount(data.totalAmount)
+      try {
+        const data = await getBooks(sortOption, currentPage, ITEMS_PER_PAGE)
+        setBooks(data.books)
+        setTotalAmount(data.totalAmount)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setLoading(false)
+      }
     }
     fetchBooks()
   }, [currentPage, sortOption])
@@ -47,21 +54,28 @@ export default function BooksPage() {
   }
 
   async function fetchSearchBooks() {
-    const data = await searchBooks(
-      sortOption,
-      currentPage,
-      ITEMS_PER_PAGE,
-      searchCategory,
-      searchQuery,
-    )
-    setBooks(data.books)
-    setTotalAmount(data.totalAmount)
+    try {
+      const data = await searchBooks(
+        sortOption,
+        currentPage,
+        ITEMS_PER_PAGE,
+        searchCategory,
+        searchQuery,
+      )
+      setBooks(data.books)
+      setTotalAmount(data.totalAmount)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const onSearch = (query: string, category: string) => {
     setSearchQuery(query)
     setSearchCategory(category)
     setCurrentPage(1)
+    setLoading(true)
     fetchSearchBooks()
   }
 
@@ -98,6 +112,9 @@ export default function BooksPage() {
             </SelectGroup>
           </SelectContent>
         </Select>
+
+        {loading && <div> Loading ... 💬 </div>}
+
         <BookList books={books} totalAmount={totalAmount} />
         {totalAmount === 0 && searchQuery && (
           <div className="flex w-full justify-center">

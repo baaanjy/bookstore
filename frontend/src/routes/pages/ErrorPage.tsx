@@ -1,3 +1,5 @@
-export default function ErrorPage(){
-  return <h1 className="font-extrabold text-center text-xl">잘못된 경로입니다.</h1>
+export default function ErrorPage() {
+  return (
+    <h1 className="text-center text-xl font-extrabold">잘못된 경로입니다.</h1>
+  )
 }

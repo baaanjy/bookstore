@@ -12,7 +12,7 @@ interface Props {
   totalAmount: number
 }
 export default function BookList({ books, totalAmount = 0 }: Props) {
-  if (!books) return <div>No Books</div>
+  if (!books) return 
 
   return (
     <div>
