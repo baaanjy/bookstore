@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 
 import { getBooks } from '@/api/book'
 import BookList from '@/components/books/BookList'
-import Pagenation from '@/components/books/Pagenation'
 import SearchBar from '@/components/books/SearchBar'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import Book from '@/types/book'
@@ -10,10 +9,13 @@ import Book from '@/types/book'
 const SORT_BY_LATEST = 'latest'
 const SORT_BY_TITLE = 'title'
 const SORT_BY_AUTHOR = 'author'
+const ITEMS_PER_PAGE = 10;
 
 export default function BooksPage() {
   const [books, setBooks] = useState<Book[] | null>(null)
   const [sortOption, setSortOption] = useState(SORT_BY_LATEST)
+  const [totalItems, setTotalItems] = useState(50)
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     async function fetchBooks() {
@@ -22,6 +24,8 @@ export default function BooksPage() {
     }
     fetchBooks()
   }, [sortOption])
+
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
   return (
     <div className="my-20 flex w-full flex-col items-center">
@@ -40,7 +44,21 @@ export default function BooksPage() {
             </SelectContent>
           </Select>
         <BookList books={books} />
-        <Pagenation />
+
+        <div className="my-10 h-10 w-full flex justify-center gap-10 items-center text-myblue">
+          <button className='hover:font-bold cursor-pointer'>이전</button>
+          <div className="flex items-center justify-center gap-5">
+
+            {Array.from({length: totalPages}, (_,i) => i + 1).map((page) => (
+              <button key={page} onClick={() => setCurrentPage(page)} className={`flex h-8 w-8 cursor-pointer items-center justify-center ${page === currentPage && "font-bold text-white bg-myblue"}`}>
+                {page}
+              </button>
+            ))}
+
+          </div>
+          <button className='hover:font-bold cursor-pointer'>다음</button>
+        </div>
+
       </div>
     </div>
   )
