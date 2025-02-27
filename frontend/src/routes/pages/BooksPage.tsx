@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { getBooks } from '@/api/book'
+import { getBooks, searchBooks } from '@/api/book'
 import BookList from '@/components/books/BookList'
 import SearchBar from '@/components/books/SearchBar'
 import {
@@ -46,10 +46,22 @@ export default function BooksPage() {
     })
   }
 
+  async function fetchSearchBooks() {
+    const data = await searchBooks(sortOption, currentPage, ITEMS_PER_PAGE, searchCategory, searchQuery)
+    if(data.totalAmount === 0){
+      setBooks([])
+      setTotalAmount(0)
+      return
+    }
+    setBooks(data.books)
+    setTotalAmount(data.totalAmount)
+  }
+
   const onSearch = (query: string, category: string) => {
     setSearchQuery(query)
     setSearchCategory(category)
     setCurrentPage(1)
+    fetchSearchBooks()
   }
 
   return (
@@ -80,10 +92,14 @@ export default function BooksPage() {
           </SelectContent>
         </Select>
         <BookList books={books} totalAmount={totalAmount} />
+        { totalAmount === 0 && 
+          <div className='flex w-full justify-center'>검색 결과가 존재하지 않습니다.</div>
+        }
 
         <div className="text-myblue my-10 flex h-10 w-full items-center justify-center gap-10">
           <button className="cursor-pointer hover:font-bold">이전</button>
           <div className="flex items-center justify-center gap-5">
+            
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}
