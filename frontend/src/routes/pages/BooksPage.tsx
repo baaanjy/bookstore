@@ -95,7 +95,7 @@ export default function BooksPage() {
           <div className='flex w-full justify-center'>검색 결과가 존재하지 않습니다.</div>
         }
 
-        <div className="text-myblue my-10 flex h-10 w-full items-center justify-center gap-10">
+        <div className="text-myblue my-10 flex h-10 w-full items-center justify-center gap-3 sm:gap-10">
           <button onClick={() => handlePages(currentPage-1)} disabled={currentPage === 1} className={`hover:font-bold ${currentPage === 1 && "hover:font-normal text-gray-400"}`}>이전</button>
           <div className="flex items-center justify-center gap-5">
             
@@ -103,10 +103,15 @@ export default function BooksPage() {
               <button
                 key={page}
                 onClick={() => handlePages(page)}
-                className={`flex h-8 w-8 cursor-pointer items-center justify-center ${page === currentPage && 'bg-myblue font-bold text-white'}`}>
+                className={`hidden sm:flex h-8 w-8 cursor-pointer items-center justify-center ${page === currentPage && 'bg-myblue font-bold text-white'}`}>
                 {page}
               </button>
             ))}
+
+            {/* 반응형 */}
+            <div className={`text-myblue sm:hidden ${currentPage > 1 && "block"}`}>...</div>
+            <button className='flex sm:hidden h-8 w-7 bg-myblue font-bold text-white justify-center items-center'>{currentPage}</button>
+            <div className={`text-myblue sm:hidden ${currentPage < totalPages && "block"}`}>...</div>
           </div>
           <button onClick={() => handlePages(currentPage + 1)} disabled={currentPage === totalPages} className={`hover:font-bold ${currentPage === totalPages && "hover:font-normal text-gray-400"}`}>다음</button>
         </div>
