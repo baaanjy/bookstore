@@ -34,7 +34,7 @@ export default function BooksPage() {
     }
     fetchBooks()
   }, [currentPage, sortOption])
-
+  
   const totalPages = Math.ceil(totalAmount / ITEMS_PER_PAGE)
 
   const handlePages = (page: number) => {
@@ -48,11 +48,6 @@ export default function BooksPage() {
 
   async function fetchSearchBooks() {
     const data = await searchBooks(sortOption, currentPage, ITEMS_PER_PAGE, searchCategory, searchQuery)
-    if(data.totalAmount === 0){
-      setBooks([])
-      setTotalAmount(0)
-      return
-    }
     setBooks(data.books)
     setTotalAmount(data.totalAmount)
   }
@@ -67,6 +62,7 @@ export default function BooksPage() {
   return (
     <div className="my-20 flex w-full flex-col items-center">
       <div className="w-2/3">
+        <button onClick={() => window.location.reload()} className='cursor-pointer h-10 text-myblue hover:font-semibold'>🔄 초기화</button>
         <SearchBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -92,7 +88,7 @@ export default function BooksPage() {
           </SelectContent>
         </Select>
         <BookList books={books} totalAmount={totalAmount} />
-        { totalAmount === 0 && 
+        { totalAmount === 0 && searchQuery && 
           <div className='flex w-full justify-center'>검색 결과가 존재하지 않습니다.</div>
         }
 

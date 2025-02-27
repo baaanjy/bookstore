@@ -36,10 +36,7 @@ export async function searchBooks(
     )
     if (response.data.success) {
       const books = response.data.data
-      console.log("searchBooks success", books)
       return books
-    } else if (response.data.status === 404) {
-      return { books:[], totalAmount: 0}
     } else {
       console.log(response.data.message)
       return []
