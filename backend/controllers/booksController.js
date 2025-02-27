@@ -10,10 +10,13 @@ async function getBooksController(req, res){
     const sortOption = req.query.sort
     const currentPage = parseInt(req.query.page) || 1
     const itemsPerPage = parseInt(req.query.limit) || 10
-    const { books, totalAmount } = await getBooks(sortOption, currentPage, itemsPerPage)
+    const searchCategory = req.query.category || 'all'
+    const searchQuery = req.query.search || ''
+
+    const { books, totalAmount } = await getBooks(sortOption, currentPage, itemsPerPage, searchCategory, searchQuery)
 
     if (!books || books.length === 0) {
-      sendResponse(res, false, 404, 'No Books Found')
+      return sendResponse(res, true, 200, 'No Books Found', { books: [], totalAmount: 0})
     }
 
     sendResponse(res, true, 200, 'Books Found', { books, totalAmount })
@@ -28,7 +31,7 @@ async function getBookController(req, res){
     const foundBook = await Book.findOne({_id: id})
     
     if(!foundBook){
-      sendResponse(res, false, 404, 'Book not found')
+      return sendResponse(res, false, 404, 'Book not found')
     }
     
     sendResponse(res, true, 200, 'Book found', foundBook)
@@ -60,7 +63,7 @@ async function updateBookController(req, res){
       )
   
       if (!updatedBook) {
-        sendResponse(res, false, 404, 'Book not found')
+        return sendResponse(res, false, 404, 'Book not found')
       }
   
       sendResponse(res, true, 200, 'Book updated', updatedBook)
@@ -75,7 +78,7 @@ async function deleteBookController(req, res){
       const deletedBook = await Book.deleteOne({_id: id})
   
       if (!deletedBook) {
-        sendResponse(res, false, 404, 'Book not found')
+        return sendResponse(res, false, 404, 'Book not found')
       }
   
       sendResponse(res, true, 200, 'Book deleted')

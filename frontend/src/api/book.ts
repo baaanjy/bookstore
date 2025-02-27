@@ -23,6 +23,30 @@ export async function getBooks(
   }
 }
 
+export async function searchBooks(
+  sortOption: string,
+  currentPage: number,
+  itemsPerPage: number,
+  searchCategory: string,
+  searchQuery: string,
+) {
+  try {
+    const response = await api.get(
+      `/books?sort=${sortOption}&page=${currentPage}&limit=${itemsPerPage}&category=${searchCategory}&search=${searchQuery}`,
+    )
+    if (response.data.success) {
+      const books = response.data.data
+      return books
+    } else {
+      console.log(response.data.message)
+      return []
+    }
+  } catch (error) {
+    console.log(error)
+    return []
+  }
+}
+
 export async function updateBook(id: string, bookData: InputBookData) {
   try {
     const response = await api.put(`/books/${id}`, bookData)
