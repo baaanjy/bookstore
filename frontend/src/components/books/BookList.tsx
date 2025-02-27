@@ -15,7 +15,7 @@ export default function BookList({ books }: Props) {
 
   return (
     <div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 pl-2">
         <p className="text-xl">총 {books.length}개</p>
         <BookDialog dialogTitle="신규 등록">
           <Tooltip text="등록">
