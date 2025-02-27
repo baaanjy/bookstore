@@ -17,11 +17,11 @@ export default function BooksPage() {
 
   useEffect(() => {
     async function fetchBooks() {
-      const data = await getBooks()
+      const data = await getBooks(sortOption)
       setBooks(data)
     }
     fetchBooks()
-  }, [])
+  }, [sortOption])
 
   return (
     <div className="my-20 flex w-full flex-col items-center">

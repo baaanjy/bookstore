@@ -1,9 +1,9 @@
 import api from '@/api/index.ts'
 import { InputBookData } from '@/types/book'
 
-export async function getBooks() {
+export async function getBooks(sortOption:string) {
   try {
-    const response = await api.get('/books')
+    const response = await api.get(`/books?sort=${sortOption}`)
     if (response.data.success) {
       const books = response.data.data
       return books

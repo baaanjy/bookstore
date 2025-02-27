@@ -9,10 +9,20 @@ function sendResponse(res, success, status, message=null, data=null){
 
 router.get('/', async (req, res) => {
   try {
-    const books = await Book.find() 
+    const sortOption = req.query.sort
+    
+    let sortBy = {}
+    switch(sortOption){
+      case 'latest': sortBy = {pub_date: -1}; break;
+      case 'title': sortBy = {title: 1}; break;
+      case 'author': sortBy = {author: 1}; break;
+    }
+
+    const books = await Book.find().sort(sortBy) 
     if (!books || books.length === 0) {
       sendResponse(res, false, 404, 'No Books Found')
     }
+
     sendResponse(res, true, 200, 'Books Found', books)
   } catch (error) {
     sendResponse(res, false, 500, 'Server error', error.message)
