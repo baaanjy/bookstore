@@ -5,7 +5,7 @@ const SORT_BY_TITLE = 'title'
 const SORT_BY_AUTHOR = 'author'
 
 
-async function getBooks(sortOption) {
+async function getBooks(sortOption, currentPage, itemsPerPage) {
   let sortBy = {}
 
   switch (sortOption) {
@@ -19,8 +19,12 @@ async function getBooks(sortOption) {
       sortBy = { author: 1 }
       break
   }
+  const skip = (currentPage - 1) * itemsPerPage
 
-  return await Book.find().sort(sortBy)
+  const books = await Book.find().sort(sortBy).skip(skip).limit(itemsPerPage)
+  const totalAmount = await Book.countDocuments()
+
+  return { books, totalAmount }
 }
 
 module.exports = { getBooks }

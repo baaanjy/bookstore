@@ -8,13 +8,15 @@ function sendResponse(res, success, status, message = null, data = null) {
 async function getBooksController(req, res){
   try {
     const sortOption = req.query.sort
-    const books = await getBooks(sortOption)
+    const currentPage = parseInt(req.query.page) || 1
+    const itemsPerPage = parseInt(req.query.limit) || 10
+    const { books, totalAmount } = await getBooks(sortOption, currentPage, itemsPerPage)
 
     if (!books || books.length === 0) {
       sendResponse(res, false, 404, 'No Books Found')
     }
 
-    sendResponse(res, true, 200, 'Books Found', books)
+    sendResponse(res, true, 200, 'Books Found', { books, totalAmount })
   } catch (error) {
     sendResponse(res, false, 500, 'Server error', error.message)
   }

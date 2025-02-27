@@ -9,14 +9,15 @@ import BookCard from './BookCard'
 
 interface Props {
   books: Book[] | null
+  totalAmount: number
 }
-export default function BookList({ books }: Props) {
+export default function BookList({ books, totalAmount=0 }: Props) {
   if (!books) return <div>No Books</div>
 
   return (
     <div>
       <div className="flex items-center gap-3 pl-2">
-        <p className="text-xl">총 {books.length}개</p>
+        <p className="text-xl">총 {totalAmount}개</p>
         <BookDialog dialogTitle="신규 등록">
           <Tooltip text="등록">
             <DialogTrigger asChild>
