@@ -4,6 +4,7 @@ import App from '@/App'
 
 import BookPage from './pages/BookPage'
 import BooksPage from './pages/BooksPage'
+import ErrorPage from './pages/ErrorPage'
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <BooksPage /> },
       { path: '/:id', element: <BookPage /> },
+      { path: "*", element: <ErrorPage /> }
     ],
   },
 ])
