@@ -4,12 +4,9 @@
 
 📚 http://bookstore-bucket.s3-website-ap-southeast-2.amazonaws.com/
 
+<br/>
 
-### 📌 주요 서비스
-- 책 등록/수정/삭제
-- 책 조회: 정렬, 검색
-  
-### 📄 상세 내용
+### 📄 주요 내용
 #### RESTful API
 - `/books` `GET`: 책 전체 조회
 - `/books/:id` `GET`: 특정 책 조회
@@ -21,7 +18,7 @@
 #### 페이지 네이션 / 정렬 / 검색
 - 전체 데이터 개수에 따라 페이지네이션 설정
 - 현재 페이지를 기준으로 데이터 요청
-- `/books` `GET` 요청시 정렬 옵션과 검색 옵션 함께 전달하요 조회
+- `/books` `GET` 요청시 정렬 옵션과 검색 옵션 함께 전달하여 조회
 #### 반응형 디자인
 
 
@@ -32,6 +29,8 @@
 - 프레임워크 및 라이브러리: React, Axios, React-hook-form
 - 스타일링: TailwindCss, Shadcn/ui
 - 기타: Vite, Node.js, MongoDB, AWS EC2, AWS S3
+
+<br/>
 
 ### 🔍 미리 보기
 
@@ -47,6 +46,8 @@
 |-------|
 |![3](https://github.com/user-attachments/assets/75a0e9ee-ca8e-47b9-9c8a-8836bf2ff5b9)|
 
+<br/>
+
 ### 🧑‍💻 로컬에서 실행하기
 백엔드 환경변수 설정(`/backend/.env`) 및 실행 (`cd backend` `npm run dev`)
 ```
@@ -58,6 +59,8 @@ FRONT_URL="http://localhost:5173"
 ```
 VITE_BASE_URL=http://localhost:3000
 ```
+
+<br/>
 
 ### 👤 Developer
 <a href="https://github.com/baaanjy"> 🔗 baaanjy</a>
