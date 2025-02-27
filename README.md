@@ -30,13 +30,13 @@
 |![3](https://github.com/user-attachments/assets/75a0e9ee-ca8e-47b9-9c8a-8836bf2ff5b9)|
 
 ### 🧑‍💻 로컬에서 실행하기
-백엔드 환경변수 설정 및 실행 `npm run dev`
+백엔드 환경변수 설정(`/backend/.env`) 및 실행 (`cd backend` `npm run dev`)
 ```
 DB_URI="mongodb://<user-name>:<pw>@<ip>:27017/<db-name>?authSource=admin"
 EXPRESS_PORT=3000
 FRONT_URL="http://localhost:5173"
 ```
-프론트엔드 환경변서 설정 및 실행 `npm run dev`
+프론트엔드 환경변수 설정(`/frontend/.env`) 및 실행(`cd frontend` `npm run dev`)
 ```
 VITE_BASE_URL=http://localhost:3000
 ```
