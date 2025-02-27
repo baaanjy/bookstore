@@ -10,13 +10,16 @@ interface Props {
 }
 export default function EditDeleteBtns({ book }: Props) {
   const handleDelete = async () => {
-    // TODO: 경고창 추가하기
-    try {
-      await deleteBook(book._id)
-      alert('💫 삭제 완료! 💫')
-      window.location.reload()
-    } catch (error) {
-      console.log(error)
+    const isConfirmed = window.confirm('정말로 이 책을 삭제하시겠습니까?')
+
+    if (isConfirmed) {
+      try {
+        await deleteBook(book._id)
+        alert('💫 삭제 완료! 💫')
+        window.location.reload()
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 

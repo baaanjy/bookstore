@@ -1,9 +1,15 @@
 import api from '@/api/index.ts'
 import { InputBookData } from '@/types/book'
 
-export async function getBooks() {
+export async function getBooks(
+  sortOption: string,
+  currentPage: number,
+  itemsPerPage: number,
+) {
   try {
-    const response = await api.get('/books')
+    const response = await api.get(
+      `/books?sort=${sortOption}&page=${currentPage}&limit=${itemsPerPage}`,
+    )
     if (response.data.success) {
       const books = response.data.data
       return books
