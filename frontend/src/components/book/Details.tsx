@@ -28,12 +28,12 @@ export default function Details() {
         {book && <EditDeleteBtns book={book} />}
       </div>
       <div className="flex h-80">
-        <div className="bg-book h-full w-1/4 p-3 group-hover:shadow-md">
+        <div className="bg-book h-full w-1/4 p-3 group-hover:shadow-md sm:block hidden">
           <p className="text-myblue text-3xl font-semibold">{book?.title}</p>
         </div>
-        <div className="flex h-full w-3/4 flex-col p-3 pl-10">
+        <div className="flex h-full w-full sm:w-3/4 flex-col p-3 sm:pl-10">
           <div className="flex flex-col gap-5">
-            <p className="text-3xl">{book?.title}</p>
+            <p className="text-2xl sm:text-3xl">{book?.title}</p>
             <p className="text-xl">{book?.author}</p>
             <p className="text-xl">
               {book?.publisher} / {book?.pub_date}
