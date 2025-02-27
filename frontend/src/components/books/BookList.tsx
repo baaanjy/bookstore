@@ -11,7 +11,7 @@ interface Props {
   books: Book[] | null
   totalAmount: number
 }
-export default function BookList({ books, totalAmount=0 }: Props) {
+export default function BookList({ books, totalAmount = 0 }: Props) {
   if (!books) return <div>No Books</div>
 
   return (

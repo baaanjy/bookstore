@@ -10,9 +10,9 @@ interface Props {
 }
 export default function EditDeleteBtns({ book }: Props) {
   const handleDelete = async () => {
-    const isConfirmed = window.confirm("정말로 이 책을 삭제하시겠습니까?");
+    const isConfirmed = window.confirm('정말로 이 책을 삭제하시겠습니까?')
 
-    if(isConfirmed){
+    if (isConfirmed) {
       try {
         await deleteBook(book._id)
         alert('💫 삭제 완료! 💫')
