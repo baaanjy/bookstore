@@ -96,7 +96,7 @@ export default function BooksPage() {
         }
 
         <div className="text-myblue my-10 flex h-10 w-full items-center justify-center gap-10">
-          <button className="cursor-pointer hover:font-bold">이전</button>
+          <button onClick={() => handlePages(currentPage-1)} disabled={currentPage === 1} className={`hover:font-bold ${currentPage === 1 && "hover:font-normal text-gray-400"}`}>이전</button>
           <div className="flex items-center justify-center gap-5">
             
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
@@ -108,7 +108,7 @@ export default function BooksPage() {
               </button>
             ))}
           </div>
-          <button className="cursor-pointer hover:font-bold">다음</button>
+          <button onClick={() => handlePages(currentPage + 1)} disabled={currentPage === totalPages} className={`hover:font-bold ${currentPage === totalPages && "hover:font-normal text-gray-400"}`}>다음</button>
         </div>
       </div>
     </div>
