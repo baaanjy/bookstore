@@ -42,6 +42,12 @@ export default function SearchBar({
     onSearch(searchQuery, searchCategory)
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if(e.key === 'Enter'){
+      handleSearch()
+    }
+  }
+
   return (
     <div className="border-myblue mb-10 h-11 w-full border-2">
       <div className="flex h-full w-full items-center justify-between px-5">
@@ -61,6 +67,7 @@ export default function SearchBar({
           type="text"
           value={searchQuery}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           className="h-full border-none shadow-none focus-visible:ring-0"
         />
         <button

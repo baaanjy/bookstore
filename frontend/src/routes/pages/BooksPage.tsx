@@ -62,7 +62,9 @@ export default function BooksPage() {
   return (
     <div className="my-20 flex w-full flex-col items-center">
       <div className="w-2/3">
-        <button onClick={() => window.location.reload()} className='cursor-pointer h-10 text-myblue hover:font-semibold'>🔄 초기화</button>
+        <button onClick={() => window.location.reload()} className='cursor-pointer h-10 text-myblue hover:font-semibold'>
+          🔄 초기화
+        </button>
         <SearchBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -75,6 +77,7 @@ export default function BooksPage() {
           onValueChange={(value) => {
             setSortOption(value)
             setCurrentPage(1)
+            setSearchQuery('')
           }}>
           <SelectTrigger className="my-5 w-32 border-none shadow-none">
             <SelectValue />
