@@ -35,15 +35,15 @@ export default function SearchBar({
   }
 
   const handleSearch = () => {
-    if(searchQuery === ''){
-      alert("검색어를 입력해주세요!")
+    if (searchQuery === '') {
+      alert('검색어를 입력해주세요!')
       return
     }
     onSearch(searchQuery, searchCategory)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if(e.key === 'Enter'){
+    if (e.key === 'Enter') {
       handleSearch()
     }
   }

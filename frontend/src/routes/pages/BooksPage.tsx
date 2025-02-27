@@ -34,7 +34,7 @@ export default function BooksPage() {
     }
     fetchBooks()
   }, [currentPage, sortOption])
-  
+
   const totalPages = Math.ceil(totalAmount / ITEMS_PER_PAGE)
 
   const handlePages = (page: number) => {
@@ -47,7 +47,13 @@ export default function BooksPage() {
   }
 
   async function fetchSearchBooks() {
-    const data = await searchBooks(sortOption, currentPage, ITEMS_PER_PAGE, searchCategory, searchQuery)
+    const data = await searchBooks(
+      sortOption,
+      currentPage,
+      ITEMS_PER_PAGE,
+      searchCategory,
+      searchQuery,
+    )
     setBooks(data.books)
     setTotalAmount(data.totalAmount)
   }
@@ -62,7 +68,9 @@ export default function BooksPage() {
   return (
     <div className="my-20 flex w-full flex-col items-center">
       <div className="w-2/3">
-        <button onClick={() => window.location.reload()} className='cursor-pointer h-10 text-myblue hover:font-semibold'>
+        <button
+          onClick={() => window.location.reload()}
+          className="text-myblue h-10 cursor-pointer hover:font-semibold">
           🔄 초기화
         </button>
         <SearchBar
@@ -91,29 +99,48 @@ export default function BooksPage() {
           </SelectContent>
         </Select>
         <BookList books={books} totalAmount={totalAmount} />
-        { totalAmount === 0 && searchQuery && 
-          <div className='flex w-full justify-center'>검색 결과가 존재하지 않습니다.</div>
-        }
+        {totalAmount === 0 && searchQuery && (
+          <div className="flex w-full justify-center">
+            검색 결과가 존재하지 않습니다.
+          </div>
+        )}
 
         <div className="text-myblue my-10 flex h-10 w-full items-center justify-center gap-3 sm:gap-10">
-          <button onClick={() => handlePages(currentPage-1)} disabled={currentPage === 1} className={`hover:font-bold ${currentPage === 1 && "hover:font-normal text-gray-400"}`}>이전</button>
+          <button
+            onClick={() => handlePages(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`hover:font-bold ${currentPage === 1 && 'text-gray-400 hover:font-normal'}`}>
+            이전
+          </button>
           <div className="flex items-center justify-center gap-5">
-            
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}
                 onClick={() => handlePages(page)}
-                className={`hidden sm:flex h-8 w-8 cursor-pointer items-center justify-center ${page === currentPage && 'bg-myblue font-bold text-white'}`}>
+                className={`hidden h-8 w-8 cursor-pointer items-center justify-center sm:flex ${page === currentPage && 'bg-myblue font-bold text-white'}`}>
                 {page}
               </button>
             ))}
 
             {/* 반응형 */}
-            <div className={`text-myblue sm:hidden ${currentPage > 1 && "block"}`}>...</div>
-            <button className='flex sm:hidden h-8 w-7 bg-myblue font-bold text-white justify-center items-center'>{currentPage}</button>
-            <div className={`text-myblue sm:hidden ${currentPage < totalPages && "block"}`}>...</div>
+            <div
+              className={`text-myblue sm:hidden ${currentPage > 1 && 'block'}`}>
+              ...
+            </div>
+            <button className="bg-myblue flex h-8 w-7 items-center justify-center font-bold text-white sm:hidden">
+              {currentPage}
+            </button>
+            <div
+              className={`text-myblue sm:hidden ${currentPage < totalPages && 'block'}`}>
+              ...
+            </div>
           </div>
-          <button onClick={() => handlePages(currentPage + 1)} disabled={currentPage === totalPages} className={`hover:font-bold ${currentPage === totalPages && "hover:font-normal text-gray-400"}`}>다음</button>
+          <button
+            onClick={() => handlePages(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`hover:font-bold ${currentPage === totalPages && 'text-gray-400 hover:font-normal'}`}>
+            다음
+          </button>
         </div>
       </div>
     </div>
