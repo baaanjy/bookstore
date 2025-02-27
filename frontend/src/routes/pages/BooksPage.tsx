@@ -23,6 +23,8 @@ export default function BooksPage() {
   const [sortOption, setSortOption] = useState(SORT_BY_LATEST)
   const [totalAmount, setTotalAmount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchCategory, setSearchCategory] = useState('all')
 
   useEffect(() => {
     async function fetchBooks() {
@@ -44,10 +46,22 @@ export default function BooksPage() {
     })
   }
 
+  const onSearch = (query: string, category: string) => {
+    setSearchQuery(query)
+    setSearchCategory(category)
+    setCurrentPage(1)
+  }
+
   return (
     <div className="my-20 flex w-full flex-col items-center">
       <div className="w-2/3">
-        <SearchBar />
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          searchCategory={searchCategory}
+          setSearchCategory={setSearchCategory}
+          onSearch={onSearch}
+        />
         <Select
           defaultValue={SORT_BY_LATEST}
           onValueChange={(value) => {
