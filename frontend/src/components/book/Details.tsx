@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { getBook } from '@/api/book'
 import Book from '@/types/book'
@@ -21,6 +21,9 @@ export default function Details() {
 
   return (
     <div className="flex w-full flex-col">
+      <Link to={"/"} className='w-30 text-left text-myblue hover:font-semibold '>
+        ⬅️ 뒤로 가기
+      </Link>
       <div className="flex h-fit items-end justify-end gap-5">
         {book && <EditDeleteBtns book={book} />}
       </div>
